@@ -115,14 +115,15 @@ const HeroSection = () => {
           <div ref={formRef} className="flex justify-center lg:justify-end">
             
             {step === 1 && <FormStep1 onContinue={handleStep1} />}
-            {step === 2 && <FormStep2 onContinue={handleStep2} />}
-            {step === 3 && <FormStep3 onContinue={handleStep3} />}
-            {step === 4 && <FormStep4 onContinue={handleStep4} />}
+            {step === 2 && <FormStep2 onContinue={handleStep2} onBack={() => setStep(1)} />}
+            {step === 3 && <FormStep3 onContinue={handleStep3} onBack={() => setStep(2)} />}
+            {step === 4 && <FormStep4 onContinue={handleStep4} onBack={() => setStep(3)} />}
             {step === 5 && (
               <FormStep5
                 formData={formData}
                 onEdit={handleEdit}
                 onSubmit={handleSubmit}
+                onBack={() => setStep(4)}
               />
             )}
           </div>
