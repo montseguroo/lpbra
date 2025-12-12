@@ -164,8 +164,8 @@ const HeroSection = () => {
           {/* Left Content */}
           <div className="text-primary-foreground">
             <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
-              <span className="italic">O cuidado que</span><br />
-              <span className="italic">sua família precisa</span>
+              <span>O cuidado que</span><br />
+              <span>sua família precisa</span>
             </h1>
             
             <p className="text-xl lg:text-2xl opacity-90 mb-8">
