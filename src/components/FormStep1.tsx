@@ -80,10 +80,11 @@ const FormStep1 = ({ onContinue }: FormStep1Props) => {
             required
           >
             <option value="MEI">MEI</option>
-            <option value="ME">ME</option>
-            <option value="EPP">EPP</option>
-            <option value="Média">Média Empresa</option>
-            <option value="Grande">Grande Empresa</option>
+            <option value="EI">EI</option>
+            <option value="SLU">SLU</option>
+            <option value="LTDA">LTDA</option>
+            <option value="SA">SA</option>
+            <option value="EIRELI">EIRELI</option>
           </select>
         </div>
 
