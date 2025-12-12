@@ -5,7 +5,7 @@ interface StepIndicatorProps {
 
 const StepIndicator = ({ currentStep, totalSteps }: StepIndicatorProps) => {
   return (
-    <div className="flex gap-2 justify-end mb-6">
+    <div className="flex gap-2 justify-center mb-6">
       {Array.from({ length: totalSteps }, (_, i) => (
         <div
           key={i}
