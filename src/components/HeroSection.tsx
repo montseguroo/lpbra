@@ -18,7 +18,7 @@ interface FormData {
 }
 
 const HeroSection = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     nome: "",
     telefone: "",
@@ -62,7 +62,7 @@ const HeroSection = () => {
       title: "Proposta enviada!",
       description: "Em breve entraremos em contato.",
     });
-    setStep(0);
+    setStep(1);
     setFormData({
       nome: "",
       telefone: "",
@@ -111,13 +111,7 @@ const HeroSection = () => {
 
           {/* Right Form */}
           <div className="flex justify-center lg:justify-end">
-            {step === 0 && (
-              <div className="text-primary-foreground text-center">
-                <p className="text-lg opacity-80">
-                  Clique no botão ao lado para<br />começar sua simulação
-                </p>
-              </div>
-            )}
+            
             {step === 1 && <FormStep1 onContinue={handleStep1} />}
             {step === 2 && <FormStep2 onContinue={handleStep2} />}
             {step === 3 && <FormStep3 onContinue={handleStep3} />}
