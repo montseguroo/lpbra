@@ -43,8 +43,12 @@ const FormStep1 = ({ onContinue }: FormStep1Props) => {
             <input
               type="tel"
               value={telefone}
-              onChange={(e) => setTelefone(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, '').slice(0, 11);
+                setTelefone(value);
+              }}
               placeholder="(00) 00000-0000"
+              maxLength={11}
               className="w-full px-4 py-3 rounded-md bg-card text-foreground placeholder:text-muted-foreground"
               required
             />
