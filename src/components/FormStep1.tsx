@@ -73,19 +73,29 @@ const FormStep1 = ({ onContinue }: FormStep1Props) => {
 
         <div>
           <label className="block text-primary-foreground text-sm mb-2">Porte da Empresa *</label>
-          <select
-            value={porteEmpresa}
-            onChange={(e) => setPorteEmpresa(e.target.value)}
-            className="w-full px-4 py-3 rounded-md bg-card text-foreground appearance-none cursor-pointer"
-            required
-          >
-            <option value="MEI">MEI</option>
-            <option value="EI">EI</option>
-            <option value="SLU">SLU</option>
-            <option value="LTDA">LTDA</option>
-            <option value="SA">SA</option>
-            <option value="EIRELI">EIRELI</option>
-          </select>
+          <div className="relative">
+            <select
+              value={porteEmpresa}
+              onChange={(e) => setPorteEmpresa(e.target.value)}
+              className="w-full px-4 py-3 pr-10 rounded-md bg-card text-foreground appearance-none cursor-pointer"
+              required
+            >
+              <option value="MEI">MEI</option>
+              <option value="EI">EI</option>
+              <option value="SLU">SLU</option>
+              <option value="LTDA">LTDA</option>
+              <option value="SA">SA</option>
+              <option value="EIRELI">EIRELI</option>
+            </select>
+            <svg 
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
         </div>
 
         <button
