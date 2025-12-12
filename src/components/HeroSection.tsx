@@ -69,22 +69,67 @@ const HeroSection = () => {
     setIsSubmitting(true);
     
     try {
+      const formDataToSend = new FormData();
+      
+      // Campos principais
+      formDataToSend.append("fields[name][value]", formData.nome);
+      formDataToSend.append("fields[name][required]", "1");
+      
+      formDataToSend.append("fields[phone][value]", formData.telefone.replace(/\D/g, ''));
+      formDataToSend.append("fields[phone][required]", "1");
+      
+      formDataToSend.append("fields[email][value]", "");
+      formDataToSend.append("fields[email][required]", "0");
+      
+      formDataToSend.append("fields[current_plan][value]", formData.planoAtual || "");
+      formDataToSend.append("fields[current_plan][required]", "0");
+      
+      formDataToSend.append("fields[company_size][value]", formData.porteEmpresa);
+      formDataToSend.append("fields[company_size][required]", "1");
+      
+      // Faixas etárias
+      formDataToSend.append("fields[age_00-18][value]", String(formData.faixasEtarias["00-18"] || 0));
+      formDataToSend.append("fields[age_19-23][value]", String(formData.faixasEtarias["19-23"] || 0));
+      formDataToSend.append("fields[age_24-28][value]", String(formData.faixasEtarias["24-28"] || 0));
+      formDataToSend.append("fields[age_29-33][value]", String(formData.faixasEtarias["29-33"] || 0));
+      formDataToSend.append("fields[age_34-38][value]", String(formData.faixasEtarias["34-38"] || 0));
+      formDataToSend.append("fields[age_39-43][value]", String(formData.faixasEtarias["39-43"] || 0));
+      formDataToSend.append("fields[age_44-48][value]", String(formData.faixasEtarias["44-48"] || 0));
+      formDataToSend.append("fields[age_49-53][value]", String(formData.faixasEtarias["49-53"] || 0));
+      formDataToSend.append("fields[age_54-58][value]", String(formData.faixasEtarias["54-58"] || 0));
+      formDataToSend.append("fields[age_59+][value]", String(formData.faixasEtarias["59+"] || 0));
+      
+      // Hospitais e doenças
+      formDataToSend.append("fields[preferred_hospitals][value]", formData.hospitais || "");
+      formDataToSend.append("fields[preferred_hospitals][required]", "0");
+      
+      formDataToSend.append("fields[pre_existing_conditions][value]", formData.doencas || "");
+      formDataToSend.append("fields[pre_existing_conditions][required]", "0");
+      
+      // UTM params (vazios por enquanto)
+      formDataToSend.append("fields[utm_source][value]", "");
+      formDataToSend.append("fields[utm_source][required]", "0");
+      formDataToSend.append("fields[utm_medium][value]", "");
+      formDataToSend.append("fields[utm_medium][required]", "0");
+      formDataToSend.append("fields[utm_campaign][value]", "");
+      formDataToSend.append("fields[utm_campaign][required]", "0");
+      formDataToSend.append("fields[utm_term][value]", "");
+      formDataToSend.append("fields[utm_term][required]", "0");
+      formDataToSend.append("fields[utm_content][value]", "");
+      formDataToSend.append("fields[utm_content][required]", "0");
+      formDataToSend.append("fields[utm_id][value]", "");
+      formDataToSend.append("fields[utm_id][required]", "0");
+      
+      // Metadados
+      formDataToSend.append("page_url", window.location.href);
+      formDataToSend.append("user_agent", navigator.userAgent);
+      formDataToSend.append("form_token", btoa(Date.now() + "-" + Math.random().toString(36).substring(2)));
+      formDataToSend.append("timestamp", String(Date.now()));
+
       await fetch("https://n8n.montseguro.link/webhook/planos", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         mode: "no-cors",
-        body: JSON.stringify({
-          nome: formData.nome,
-          telefone: formData.telefone,
-          planoAtual: formData.planoAtual,
-          porteEmpresa: formData.porteEmpresa,
-          faixasEtarias: formatFaixas(),
-          hospitais: formData.hospitais,
-          doencas: formData.doencas,
-          timestamp: new Date().toISOString(),
-        }),
+        body: formDataToSend,
       });
 
       window.location.href = "https://obrigado.montseguro.com.br/";
