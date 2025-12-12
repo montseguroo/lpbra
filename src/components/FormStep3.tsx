@@ -29,7 +29,7 @@ const FormStep3 = ({ onContinue }: FormStep3Props) => {
           <textarea
             value={hospitais}
             onChange={(e) => setHospitais(e.target.value)}
-            placeholder=""
+            placeholder="Ex: Hospital Albert Einstein, Sírio-Libanês, Zona Sul de SP..."
             className="w-full px-4 py-3 rounded-md bg-card text-foreground placeholder:text-muted-foreground min-h-[120px] resize-none"
             required
           />
