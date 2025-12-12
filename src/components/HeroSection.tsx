@@ -19,6 +19,7 @@ interface FormData {
 
 const HeroSection = () => {
   const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState<FormData>({
     nome: "",
@@ -59,8 +60,43 @@ const HeroSection = () => {
     setStep(editStep);
   };
 
-  const handleSubmit = () => {
-    window.location.href = "https://obrigado.montseguro.com.br/";
+  const formatFaixas = () => {
+    const entries = Object.entries(formData.faixasEtarias).filter(([_, count]) => count > 0);
+    return entries.map(([faixa, count]) => `${faixa}: ${count}`).join(", ") || "Nenhuma";
+  };
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    
+    try {
+      await fetch("https://n8n.montseguro.link/webhook/planos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors",
+        body: JSON.stringify({
+          nome: formData.nome,
+          telefone: formData.telefone,
+          planoAtual: formData.planoAtual,
+          porteEmpresa: formData.porteEmpresa,
+          faixasEtarias: formatFaixas(),
+          hospitais: formData.hospitais,
+          doencas: formData.doencas,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      window.location.href = "https://obrigado.montseguro.com.br/";
+    } catch (error) {
+      console.error("Erro ao enviar dados:", error);
+      toast({
+        title: "Erro",
+        description: "Houve um erro ao enviar seus dados. Tente novamente.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+    }
   };
 
   return (
