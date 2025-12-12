@@ -60,20 +60,7 @@ const HeroSection = () => {
   };
 
   const handleSubmit = () => {
-    toast({
-      title: "Proposta enviada!",
-      description: "Em breve entraremos em contato.",
-    });
-    setStep(1);
-    setFormData({
-      nome: "",
-      telefone: "",
-      planoAtual: "",
-      porteEmpresa: "",
-      faixasEtarias: {},
-      hospitais: "",
-      doencas: "",
-    });
+    window.location.href = "https://obrigado.montseguro.com.br/";
   };
 
   return (
