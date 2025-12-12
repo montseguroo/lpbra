@@ -9,7 +9,7 @@ const FormStep1 = ({ onContinue }: FormStep1Props) => {
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
   const [planoAtual, setPlanoAtual] = useState("");
-  const [porteEmpresa, setPorteEmpresa] = useState("MEI");
+  const [porteEmpresa, setPorteEmpresa] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,6 +80,7 @@ const FormStep1 = ({ onContinue }: FormStep1Props) => {
               className="w-full px-4 py-3 pr-10 rounded-md bg-card text-foreground appearance-none cursor-pointer"
               required
             >
+              <option value="" disabled>Selecione...</option>
               <option value="MEI">MEI</option>
               <option value="EI">EI</option>
               <option value="SLU">SLU</option>
