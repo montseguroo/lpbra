@@ -31,119 +31,117 @@ const FormStep5 = ({ formData, onEdit, onSubmit }: FormStep5Props) => {
     <div className="w-full max-w-md">
       <StepIndicator currentStep={5} totalSteps={5} />
       
-      <h2 className="text-2xl font-bold text-primary-foreground text-center mb-8">
+      <h2 className="text-2xl font-bold text-primary-foreground text-center mb-6">
         Confirme seus dados
       </h2>
 
-      <form onSubmit={handleSubmit} className="bg-card rounded-lg overflow-hidden">
-        <div className="divide-y divide-border">
-          <div className="p-4 flex justify-between items-start">
+      <form onSubmit={handleSubmit}>
+        <div className="bg-primary-foreground/10 rounded-lg overflow-hidden backdrop-blur-sm">
+          <div className="py-3 px-4 flex justify-between items-start">
             <div>
-              <span className="text-muted-foreground text-sm">Nome</span>
-              <p className="text-foreground font-medium">{formData.nome || "—"}</p>
+              <span className="text-primary-foreground/70 text-sm">Nome</span>
+              <p className="text-primary-foreground font-medium">{formData.nome || "—"}</p>
             </div>
             <button
               type="button"
               onClick={() => onEdit(1)}
-              className="text-primary text-sm font-medium hover:underline"
+              className="text-primary-foreground text-sm font-medium hover:underline"
             >
               Editar
             </button>
           </div>
 
-          <div className="p-4 flex justify-between items-start">
+          <div className="py-3 px-4 flex justify-between items-start">
             <div>
-              <span className="text-muted-foreground text-sm">Telefone</span>
-              <p className="text-foreground font-medium">{formData.telefone || "—"}</p>
+              <span className="text-primary-foreground/70 text-sm">Telefone</span>
+              <p className="text-primary-foreground font-medium">{formData.telefone || "—"}</p>
             </div>
             <button
               type="button"
               onClick={() => onEdit(1)}
-              className="text-primary text-sm font-medium hover:underline"
+              className="text-primary-foreground text-sm font-medium hover:underline"
             >
               Editar
             </button>
           </div>
 
-          <div className="p-4 flex justify-between items-start">
+          <div className="py-3 px-4 flex justify-between items-start">
             <div>
-              <span className="text-muted-foreground text-sm">Plano Atual</span>
-              <p className="text-foreground font-medium">{formData.planoAtual || "—"}</p>
+              <span className="text-primary-foreground/70 text-sm">Plano Atual</span>
+              <p className="text-primary-foreground font-medium">{formData.planoAtual || "—"}</p>
             </div>
             <button
               type="button"
               onClick={() => onEdit(1)}
-              className="text-primary text-sm font-medium hover:underline"
+              className="text-primary-foreground text-sm font-medium hover:underline"
             >
               Editar
             </button>
           </div>
 
-          <div className="p-4 flex justify-between items-start">
+          <div className="py-3 px-4 flex justify-between items-start">
             <div>
-              <span className="text-muted-foreground text-sm">Porte da Empresa</span>
-              <p className="text-foreground font-medium">{formData.porteEmpresa || "—"}</p>
+              <span className="text-primary-foreground/70 text-sm">Porte da Empresa</span>
+              <p className="text-primary-foreground font-medium">{formData.porteEmpresa || "—"}</p>
             </div>
             <button
               type="button"
               onClick={() => onEdit(1)}
-              className="text-primary text-sm font-medium hover:underline"
+              className="text-primary-foreground text-sm font-medium hover:underline"
             >
               Editar
             </button>
           </div>
 
-          <div className="p-4 flex justify-between items-start">
+          <div className="py-3 px-4 flex justify-between items-start">
             <div>
-              <span className="text-muted-foreground text-sm">Faixas Etárias</span>
-              <p className="text-foreground font-medium">{formatFaixas()}</p>
+              <span className="text-primary-foreground/70 text-sm">Faixas Etárias</span>
+              <p className="text-primary-foreground font-medium">{formatFaixas()}</p>
             </div>
             <button
               type="button"
               onClick={() => onEdit(2)}
-              className="text-primary text-sm font-medium hover:underline"
+              className="text-primary-foreground text-sm font-medium hover:underline"
             >
               Editar
             </button>
           </div>
 
-          <div className="p-4 flex justify-between items-start">
+          <div className="py-3 px-4 flex justify-between items-start">
             <div>
-              <span className="text-muted-foreground text-sm">Hospitais de Preferência</span>
-              <p className="text-foreground font-medium">{formData.hospitais || "—"}</p>
+              <span className="text-primary-foreground/70 text-sm">Hospitais de Preferência</span>
+              <p className="text-primary-foreground font-medium">{formData.hospitais || "—"}</p>
             </div>
             <button
               type="button"
               onClick={() => onEdit(3)}
-              className="text-primary text-sm font-medium hover:underline"
+              className="text-primary-foreground text-sm font-medium hover:underline"
             >
               Editar
             </button>
           </div>
 
-          <div className="p-4 flex justify-between items-start">
+          <div className="py-3 px-4 flex justify-between items-start">
             <div>
-              <span className="text-muted-foreground text-sm">Doenças Pré-existentes</span>
-              <p className="text-foreground font-medium">{formData.doencas || "—"}</p>
+              <span className="text-primary-foreground/70 text-sm">Doenças Pré-existentes</span>
+              <p className="text-primary-foreground font-medium">{formData.doencas || "—"}</p>
             </div>
             <button
               type="button"
               onClick={() => onEdit(4)}
-              className="text-primary text-sm font-medium hover:underline"
+              className="text-primary-foreground text-sm font-medium hover:underline"
             >
               Editar
             </button>
           </div>
         </div>
 
-        <div className="p-4">
-          <button
-            type="submit"
-            className="w-full py-4 bg-card border-2 border-primary text-primary font-semibold rounded-md hover:bg-primary/5 transition-colors"
-          >
-            CONFIRMAR E ENVIAR
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="w-full py-4 mt-4 bg-card text-primary font-semibold rounded-md hover:bg-card/90 transition-colors"
+        >
+          CONFIRMAR E ENVIAR
+        </button>
       </form>
     </div>
   );
