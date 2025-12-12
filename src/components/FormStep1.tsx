@@ -30,7 +30,10 @@ const FormStep1 = ({ onContinue }: FormStep1Props) => {
           <input
             type="text"
             value={nome}
-            onChange={(e) => setNome(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+              setNome(value);
+            }}
             placeholder="Digite aqui seu nome"
             className="w-full px-4 py-3 rounded-md bg-card text-foreground placeholder:text-muted-foreground"
             required
@@ -58,7 +61,10 @@ const FormStep1 = ({ onContinue }: FormStep1Props) => {
             <input
               type="text"
               value={planoAtual}
-              onChange={(e) => setPlanoAtual(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+                setPlanoAtual(value);
+              }}
               placeholder="Seu plano atual?"
               className="w-full px-4 py-3 rounded-md bg-card text-foreground placeholder:text-muted-foreground"
             />
