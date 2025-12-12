@@ -1,6 +1,7 @@
 import { useState } from "react";
 import StepIndicator from "./StepIndicator";
 import AgeCounter from "./AgeCounter";
+import { ArrowLeft } from "lucide-react";
 
 interface AgeData {
   [key: string]: number;
@@ -8,9 +9,10 @@ interface AgeData {
 
 interface FormStep2Props {
   onContinue: (data: AgeData) => void;
+  onBack: () => void;
 }
 
-const FormStep2 = ({ onContinue }: FormStep2Props) => {
+const FormStep2 = ({ onContinue, onBack }: FormStep2Props) => {
   const [ages, setAges] = useState<AgeData>({
     "00-18": 0,
     "19-23": 0,
@@ -69,12 +71,22 @@ const FormStep2 = ({ onContinue }: FormStep2Props) => {
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full py-4 bg-card text-primary font-semibold rounded-md hover:bg-card/90 transition-colors mt-6"
-        >
-          CONTINUAR
-        </button>
+        <div className="flex gap-3 mt-6">
+          <button
+            type="button"
+            onClick={onBack}
+            className="flex items-center justify-center gap-2 py-4 px-6 bg-primary-foreground/10 text-primary-foreground font-semibold rounded-md hover:bg-primary-foreground/20 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Voltar
+          </button>
+          <button
+            type="submit"
+            className="flex-1 py-4 bg-card text-primary font-semibold rounded-md hover:bg-card/90 transition-colors"
+          >
+            CONTINUAR
+          </button>
+        </div>
       </form>
     </div>
   );

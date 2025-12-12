@@ -1,4 +1,5 @@
 import StepIndicator from "./StepIndicator";
+import { ArrowLeft } from "lucide-react";
 
 interface FormData {
   nome: string;
@@ -14,9 +15,10 @@ interface FormStep5Props {
   formData: FormData;
   onEdit: (step: number) => void;
   onSubmit: () => void;
+  onBack: () => void;
 }
 
-const FormStep5 = ({ formData, onEdit, onSubmit }: FormStep5Props) => {
+const FormStep5 = ({ formData, onEdit, onSubmit, onBack }: FormStep5Props) => {
   const formatFaixas = () => {
     const entries = Object.entries(formData.faixasEtarias).filter(([_, count]) => count > 0);
     return entries.map(([faixa, count]) => `${faixa}: ${count}`).join(", ") || "Nenhuma";
@@ -136,12 +138,22 @@ const FormStep5 = ({ formData, onEdit, onSubmit }: FormStep5Props) => {
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="w-full py-4 mt-4 bg-card text-primary font-semibold rounded-md hover:bg-card/90 transition-colors"
-        >
-          CONFIRMAR E ENVIAR
-        </button>
+        <div className="flex gap-3 mt-4">
+          <button
+            type="button"
+            onClick={onBack}
+            className="flex items-center justify-center gap-2 py-4 px-6 bg-primary-foreground/10 text-primary-foreground font-semibold rounded-md hover:bg-primary-foreground/20 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Voltar
+          </button>
+          <button
+            type="submit"
+            className="flex-1 py-4 bg-card text-primary font-semibold rounded-md hover:bg-card/90 transition-colors"
+          >
+            CONFIRMAR E ENVIAR
+          </button>
+        </div>
       </form>
     </div>
   );

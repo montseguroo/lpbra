@@ -1,11 +1,13 @@
 import { useState } from "react";
 import StepIndicator from "./StepIndicator";
+import { ArrowLeft } from "lucide-react";
 
 interface FormStep3Props {
   onContinue: (data: string) => void;
+  onBack: () => void;
 }
 
-const FormStep3 = ({ onContinue }: FormStep3Props) => {
+const FormStep3 = ({ onContinue, onBack }: FormStep3Props) => {
   const [hospitais, setHospitais] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -35,12 +37,22 @@ const FormStep3 = ({ onContinue }: FormStep3Props) => {
           />
         </div>
 
-        <button
-          type="submit"
-          className="w-full py-4 bg-card text-primary font-semibold rounded-md hover:bg-card/90 transition-colors"
-        >
-          CONTINUAR
-        </button>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={onBack}
+            className="flex items-center justify-center gap-2 py-4 px-6 bg-primary-foreground/10 text-primary-foreground font-semibold rounded-md hover:bg-primary-foreground/20 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Voltar
+          </button>
+          <button
+            type="submit"
+            className="flex-1 py-4 bg-card text-primary font-semibold rounded-md hover:bg-card/90 transition-colors"
+          >
+            CONTINUAR
+          </button>
+        </div>
       </form>
     </div>
   );
