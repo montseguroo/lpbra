@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import FormStep1 from "./FormStep1";
 import FormStep2 from "./FormStep2";
@@ -19,6 +19,7 @@ interface FormData {
 
 const HeroSection = () => {
   const [step, setStep] = useState(1);
+  const formRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState<FormData>({
     nome: "",
     telefone: "",
@@ -31,6 +32,7 @@ const HeroSection = () => {
 
   const handleStartForm = () => {
     setStep(1);
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   const handleStep1 = (data: { nome: string; telefone: string; planoAtual: string; porteEmpresa: string }) => {
@@ -110,7 +112,7 @@ const HeroSection = () => {
           </div>
 
           {/* Right Form */}
-          <div className="flex justify-center lg:justify-end">
+          <div ref={formRef} className="flex justify-center lg:justify-end">
             
             {step === 1 && <FormStep1 onContinue={handleStep1} />}
             {step === 2 && <FormStep2 onContinue={handleStep2} />}
