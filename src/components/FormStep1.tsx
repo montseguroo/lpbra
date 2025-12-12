@@ -11,6 +11,18 @@ const FormStep1 = ({ onContinue }: FormStep1Props) => {
   const [planoAtual, setPlanoAtual] = useState("");
   const [porteEmpresa, setPorteEmpresa] = useState("");
 
+  const formatPhone = (value: string) => {
+    const numbers = value.replace(/\D/g, '').slice(0, 11);
+    if (numbers.length <= 2) return numbers.length ? `(${numbers}` : '';
+    if (numbers.length <= 7) return `(${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
+    return `(${numbers.slice(0, 2)}) ${numbers.slice(2, 7)}-${numbers.slice(7)}`;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhone(e.target.value);
+    setTelefone(formatted);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onContinue({ nome, telefone, planoAtual, porteEmpresa });
@@ -46,12 +58,9 @@ const FormStep1 = ({ onContinue }: FormStep1Props) => {
             <input
               type="tel"
               value={telefone}
-              onChange={(e) => {
-                const value = e.target.value.replace(/\D/g, '').slice(0, 11);
-                setTelefone(value);
-              }}
+              onChange={handlePhoneChange}
               placeholder="(00) 00000-0000"
-              maxLength={11}
+              maxLength={15}
               className="w-full px-4 py-3 rounded-md bg-card text-foreground placeholder:text-muted-foreground"
               required
             />
