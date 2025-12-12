@@ -7,7 +7,7 @@ const Header = () => {
         <img 
           src={bradescoLogo} 
           alt="Bradesco Saúde" 
-          className="h-16 w-auto"
+          className="h-12 w-auto"
         />
       </div>
     </header>
