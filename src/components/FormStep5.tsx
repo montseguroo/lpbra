@@ -138,20 +138,20 @@ const FormStep5 = ({ formData, onEdit, onSubmit, onBack }: FormStep5Props) => {
           </div>
         </div>
 
-        <div className="flex gap-3 mt-4">
+        <div className="flex flex-col gap-3 mt-4">
+          <button
+            type="submit"
+            className="w-full py-4 bg-card text-primary font-semibold rounded-md hover:bg-card/90 transition-colors"
+          >
+            CONFIRMAR E ENVIAR
+          </button>
           <button
             type="button"
             onClick={onBack}
-            className="flex items-center justify-center gap-2 py-4 px-6 bg-primary-foreground/10 text-primary-foreground font-semibold rounded-md hover:bg-primary-foreground/20 transition-colors"
+            className="flex items-center justify-center gap-2 text-primary-foreground/70 text-sm hover:text-primary-foreground transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Voltar
-          </button>
-          <button
-            type="submit"
-            className="flex-1 py-4 bg-card text-primary font-semibold rounded-md hover:bg-card/90 transition-colors"
-          >
-            CONFIRMAR E ENVIAR
           </button>
         </div>
       </form>
