@@ -65,11 +65,24 @@ const HeroSection = () => {
     return entries.map(([faixa, count]) => `${faixa}: ${count}`).join(", ") || "Nenhuma";
   };
 
+  const getUtmParams = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return {
+      utm_source: urlParams.get('utm_source') || '',
+      utm_medium: urlParams.get('utm_medium') || '',
+      utm_campaign: urlParams.get('utm_campaign') || '',
+      utm_term: urlParams.get('utm_term') || '',
+      utm_content: urlParams.get('utm_content') || '',
+      utm_id: urlParams.get('utm_id') || '',
+    };
+  };
+
   const handleSubmit = async () => {
     setIsSubmitting(true);
     
     try {
       const formDataToSend = new FormData();
+      const utmParams = getUtmParams();
       
       // Campos principais
       formDataToSend.append("fields[name][value]", formData.nome);
@@ -106,18 +119,18 @@ const HeroSection = () => {
       formDataToSend.append("fields[pre_existing_conditions][value]", formData.doencas || "");
       formDataToSend.append("fields[pre_existing_conditions][required]", "0");
       
-      // UTM params (vazios por enquanto)
-      formDataToSend.append("fields[utm_source][value]", "");
+      // UTM params capturados da URL
+      formDataToSend.append("fields[utm_source][value]", utmParams.utm_source);
       formDataToSend.append("fields[utm_source][required]", "0");
-      formDataToSend.append("fields[utm_medium][value]", "");
+      formDataToSend.append("fields[utm_medium][value]", utmParams.utm_medium);
       formDataToSend.append("fields[utm_medium][required]", "0");
-      formDataToSend.append("fields[utm_campaign][value]", "");
+      formDataToSend.append("fields[utm_campaign][value]", utmParams.utm_campaign);
       formDataToSend.append("fields[utm_campaign][required]", "0");
-      formDataToSend.append("fields[utm_term][value]", "");
+      formDataToSend.append("fields[utm_term][value]", utmParams.utm_term);
       formDataToSend.append("fields[utm_term][required]", "0");
-      formDataToSend.append("fields[utm_content][value]", "");
+      formDataToSend.append("fields[utm_content][value]", utmParams.utm_content);
       formDataToSend.append("fields[utm_content][required]", "0");
-      formDataToSend.append("fields[utm_id][value]", "");
+      formDataToSend.append("fields[utm_id][value]", utmParams.utm_id);
       formDataToSend.append("fields[utm_id][required]", "0");
       
       // Metadados
