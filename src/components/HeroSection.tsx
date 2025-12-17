@@ -145,6 +145,16 @@ const HeroSection = () => {
         body: formDataToSend,
       });
 
+      // Push conversion event to GTM dataLayer
+      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+        (window as any).dataLayer.push({
+          event: 'form_submission',
+          form_name: 'cotacao_plano_saude',
+          company_size: formData.porteEmpresa,
+          ...utmParams
+        });
+      }
+
       window.location.href = "https://obrigado.montseguro.com.br/";
     } catch (error) {
       console.error("Erro ao enviar dados:", error);
