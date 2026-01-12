@@ -134,10 +134,16 @@ const HeroSection = () => {
       formDataToSend.append("fields[utm_id][required]", "0");
       
       // Metadados
+      const now = new Date();
+      const registrationDate = now.toLocaleDateString('pt-BR'); // DD/MM/YYYY
+      const registrationTime = now.toLocaleTimeString('pt-BR'); // HH:MM:SS
+      
       formDataToSend.append("page_url", window.location.href);
       formDataToSend.append("user_agent", navigator.userAgent);
       formDataToSend.append("form_token", btoa(Date.now() + "-" + Math.random().toString(36).substring(2)));
       formDataToSend.append("timestamp", String(Date.now()));
+      formDataToSend.append("fields[registration_date][value]", registrationDate);
+      formDataToSend.append("fields[registration_time][value]", registrationTime);
 
       await fetch("https://n8n.montseguro.link/webhook/planos", {
         method: "POST",
