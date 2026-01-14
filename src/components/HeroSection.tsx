@@ -133,6 +133,11 @@ const HeroSection = () => {
       formDataToSend.append("fields[utm_id][value]", utmParams.utm_id);
       formDataToSend.append("fields[utm_id][required]", "0");
       
+      // Total de vidas (soma de todas as faixas etárias)
+      const totalVidas = Object.values(formData.faixasEtarias).reduce((sum, count) => sum + count, 0);
+      formDataToSend.append("fields[Total de Vidas][value]", String(totalVidas));
+      formDataToSend.append("fields[Total de Vidas][required]", "0");
+      
       // Metadados
       const now = new Date();
       const registrationDate = now.toLocaleDateString('pt-BR'); // DD/MM/YYYY
