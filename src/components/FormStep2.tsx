@@ -35,11 +35,6 @@ const FormStep2 = ({ onContinue, onBack }: FormStep2Props) => {
     onContinue(ages);
   };
 
-  const ageRanges = [
-    ["00-18", "19-23", "24-28"],
-    ["29-33", "34-38", "39-43"],
-    ["44-48", "49-53", "54-58"],
-  ];
 
   return (
     <div className="w-full max-w-md">
@@ -50,25 +45,15 @@ const FormStep2 = ({ onContinue, onBack }: FormStep2Props) => {
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {ageRanges.map((row, rowIndex) => (
-          <div key={rowIndex} className="grid grid-cols-3 gap-4">
-            {row.map(range => (
-              <AgeCounter
-                key={range}
-                label={range}
-                value={ages[range]}
-                onChange={(value) => updateAge(range, value)}
-              />
-            ))}
-          </div>
-        ))}
-        
-        <div className="flex justify-center">
-          <AgeCounter
-            label="59+"
-            value={ages["59+"]}
-            onChange={(value) => updateAge("59+", value)}
-          />
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {Object.keys(ages).map(range => (
+            <AgeCounter
+              key={range}
+              label={range}
+              value={ages[range]}
+              onChange={(value) => updateAge(range, value)}
+            />
+          ))}
         </div>
 
         <div className="flex flex-col gap-3 mt-6">
