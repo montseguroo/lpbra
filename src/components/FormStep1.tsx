@@ -26,9 +26,13 @@ const FormStep1 = ({ onContinue }: FormStep1Props) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const digits = telefone.replace(/\D/g, '');
+    if (digits.length < 11) {
+      alert("WhatsApp inválido. O número deve ter no mínimo 11 dígitos.");
+      return;
+    }
     const uniqueDigits = new Set(digits.split('')).size;
     if (uniqueDigits < 4) {
-      alert("O telefone deve conter no mínimo 4 dígitos diferentes.");
+      alert("WhatsApp inválido. O número deve conter no mínimo 4 dígitos diferentes.");
       return;
     }
     onContinue({ nome, telefone, planoAtual, porteEmpresa });
