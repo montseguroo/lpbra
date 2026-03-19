@@ -32,7 +32,7 @@ const FormStep1 = ({ onContinue }: FormStep1Props) => {
     }
     const uniqueDigits = new Set(digits.split('')).size;
     if (uniqueDigits < 4) {
-      alert("WhatsApp inválido. O número deve conter no mínimo 4 dígitos diferentes.");
+      alert("WhatsApp inválido.");
       return;
     }
     onContinue({ nome, telefone, planoAtual, porteEmpresa });
