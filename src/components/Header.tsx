@@ -1,5 +1,5 @@
 import bradescoLogo from "@/assets/bradesco-logo.png";
-import montseguroLogo from "@/assets/montseguro-logo.png";
+import montseguroLogo from "@/assets/montseguro-logo-new.jpg";
 
 const Header = () => {
   return (
