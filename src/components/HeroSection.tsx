@@ -153,11 +153,31 @@ const HeroSection = () => {
       formDataToSend.append("fields[registration_date][value]", registrationDate);
       formDataToSend.append("fields[registration_time][value]", registrationTime);
 
+      // Enviar para n8n
       await fetch("https://n8n.montseguro.link/webhook/planos", {
         method: "POST",
         mode: "no-cors",
         body: formDataToSend,
       });
+
+      // Enviar para Google Sheets via edge function
+      const sheetsPayload = {
+        nome: formData.nome,
+        telefone: formData.telefone,
+        porteEmpresa: formData.porteEmpresa,
+        planoAtual: formData.planoAtual,
+        faixasEtarias: formData.faixasEtarias,
+        hospitais: formData.hospitais,
+        doencas: formData.doencas,
+        ...utmParams,
+      };
+
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      fetch(`${supabaseUrl}/functions/v1/send-to-sheets`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(sheetsPayload),
+      }).catch(err => console.error("Sheets error:", err));
 
       // Push conversion event to GTM dataLayer
       if (typeof window !== 'undefined' && (window as any).dataLayer) {
