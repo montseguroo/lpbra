@@ -24,6 +24,7 @@ const createJWT = async (serviceAccount: { client_email: string; private_key: st
   const pemContents = serviceAccount.private_key
     .replace('-----BEGIN PRIVATE KEY-----', '')
     .replace('-----END PRIVATE KEY-----', '')
+    .replace(/\\n/g, '')
     .replace(/\n/g, '');
   const binaryKey = Uint8Array.from(atob(pemContents), (c) => c.charCodeAt(0));
 
@@ -131,7 +132,7 @@ Deno.serve(async (req) => {
     const accessToken = await getAccessToken(serviceAccount);
 
     const sheetsRes = await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A:J:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
+      `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/P%C3%A1gina1!A:J:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
       {
         method: 'POST',
         headers: {
