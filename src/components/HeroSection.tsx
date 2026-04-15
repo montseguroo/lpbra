@@ -6,6 +6,7 @@ import FormStep3 from "./FormStep3";
 import FormStep4 from "./FormStep4";
 import FormStep5 from "./FormStep5";
 import { toast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface FormData {
   nome: string;
@@ -143,8 +144,8 @@ const HeroSection = () => {
       
       // Metadados
       const now = new Date();
-      const registrationDate = now.toLocaleDateString('pt-BR'); // DD/MM/YYYY
-      const registrationTime = now.toLocaleTimeString('pt-BR'); // HH:MM:SS
+      const registrationDate = now.toLocaleDateString('pt-BR');
+      const registrationTime = now.toLocaleTimeString('pt-BR');
       
       formDataToSend.append("page_url", window.location.href);
       formDataToSend.append("user_agent", navigator.userAgent);
@@ -160,7 +161,7 @@ const HeroSection = () => {
         body: formDataToSend,
       });
 
-      // Enviar para Google Sheets via edge function
+      // Enviar para Google Sheets via backend e aguardar antes do redirect
       const sheetsPayload = {
         nome: formData.nome,
         telefone: formData.telefone,
@@ -172,12 +173,13 @@ const HeroSection = () => {
         ...utmParams,
       };
 
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      fetch(`${supabaseUrl}/functions/v1/send-to-sheets`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(sheetsPayload),
-      }).catch(err => console.error("Sheets error:", err));
+      const { error: sheetsError } = await supabase.functions.invoke("send-to-sheets", {
+        body: sheetsPayload,
+      });
+
+      if (sheetsError) {
+        throw new Error(sheetsError.message || "Erro ao enviar para Google Sheets");
+      }
 
       // Push conversion event to GTM dataLayer
       if (typeof window !== 'undefined' && (window as any).dataLayer) {
