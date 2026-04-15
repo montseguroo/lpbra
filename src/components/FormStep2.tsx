@@ -63,6 +63,10 @@ const FormStep2 = ({ onContinue, onBack }: FormStep2Props) => {
           ))}
         </div>
 
+        {error && (
+          <p className="text-red-300 text-sm text-center font-medium">{error}</p>
+        )}
+
         <div className="flex flex-col gap-3 mt-6">
           <button
             type="submit"
