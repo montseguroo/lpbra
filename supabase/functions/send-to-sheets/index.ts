@@ -21,7 +21,6 @@ const createJWT = async (serviceAccount: { client_email: string; private_key: st
   const payloadB64 = encode(payload);
   const signingInput = `${headerB64}.${payloadB64}`;
 
-  // Import the private key
   const pemContents = serviceAccount.private_key
     .replace('-----BEGIN PRIVATE KEY-----', '')
     .replace('-----END PRIVATE KEY-----', '')
@@ -94,45 +93,45 @@ Deno.serve(async (req) => {
       gclid = '',
     } = body;
 
-    const totalVidas = Object.values(faixasEtarias as Record<string, number>).reduce(
-      (sum: number, count: number) => sum + count,
-      0
-    );
-
-    const now = new Date();
-    const data = now.toLocaleDateString('pt-BR');
-    const horario = now.toLocaleTimeString('pt-BR');
-
-    // Faixas etárias formatadas
+    // Build "conversao" as a summary string with faixas, hospitais, doencas
     const faixasStr = Object.entries(faixasEtarias as Record<string, number>)
       .filter(([_, count]) => count > 0)
       .map(([faixa, count]) => `${faixa}: ${count}`)
       .join(', ') || '';
 
+    const totalVidas = Object.values(faixasEtarias as Record<string, number>).reduce(
+      (sum: number, count: number) => sum + count,
+      0
+    );
+
+    const conversaoParts = [];
+    if (totalVidas > 0) conversaoParts.push(`Vidas: ${totalVidas} (${faixasStr})`);
+    if (hospitais) conversaoParts.push(`Hospitais: ${hospitais}`);
+    if (doencas) conversaoParts.push(`Doenças: ${doencas}`);
+    const conversao = conversaoParts.join(' | ') || '';
+
+    const now = new Date();
+    const data = now.toLocaleDateString('pt-BR');
+    const horario = now.toLocaleTimeString('pt-BR');
+
+    // Columns: nome, telefone, porte, conversao, utm_campaign, utm_term, plano, data, horário, gclid
     const row = [
       nome,
       telefone,
       porteEmpresa,
-      planoAtual,
-      totalVidas,
-      faixasStr,
-      hospitais,
-      doencas,
-      utm_source,
-      utm_medium,
+      conversao,
       utm_campaign,
       utm_term,
-      utm_content,
-      utm_id,
-      gclid,
+      planoAtual,
       data,
       horario,
+      gclid,
     ];
 
     const accessToken = await getAccessToken(serviceAccount);
 
     const sheetsRes = await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A:Q:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
+      `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/A:J:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
       {
         method: 'POST',
         headers: {
