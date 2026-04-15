@@ -25,13 +25,20 @@ const FormStep2 = ({ onContinue, onBack }: FormStep2Props) => {
     "54-58": 0,
     "59+": 0,
   });
+  const [error, setError] = useState("");
 
   const updateAge = (key: string, value: number) => {
     setAges(prev => ({ ...prev, [key]: value }));
+    setError("");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const total = Object.values(ages).reduce((sum, v) => sum + v, 0);
+    if (total < 1) {
+      setError("Selecione pelo menos 1 vida.");
+      return;
+    }
     onContinue(ages);
   };
 
@@ -55,6 +62,10 @@ const FormStep2 = ({ onContinue, onBack }: FormStep2Props) => {
             />
           ))}
         </div>
+
+        {error && (
+          <p className="text-red-300 text-sm text-center font-medium">{error}</p>
+        )}
 
         <div className="flex flex-col gap-3 mt-6">
           <button
