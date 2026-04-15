@@ -76,7 +76,7 @@ const FormStep1 = ({ onContinue }: FormStep1Props) => {
             />
           </div>
           <div>
-            <label className="block text-primary-foreground text-sm mb-2">Plano Atual</label>
+            <label className="block text-primary-foreground text-sm mb-2">Plano Atual *</label>
             <input
               type="text"
               value={planoAtual}
@@ -86,6 +86,7 @@ const FormStep1 = ({ onContinue }: FormStep1Props) => {
               }}
               placeholder="Seu plano atual?"
               className="w-full px-4 py-3 rounded-md bg-card text-foreground placeholder:text-muted-foreground"
+              required
             />
           </div>
         </div>
