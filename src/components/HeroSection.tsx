@@ -76,6 +76,7 @@ const HeroSection = () => {
       utm_content: urlParams.get('utm_content') || '',
       utm_id: urlParams.get('utm_id') || '',
       gclid: urlParams.get('gclid') || '',
+      keyword: urlParams.get('keyword') || '',
     };
   };
 
@@ -136,6 +137,8 @@ const HeroSection = () => {
       formDataToSend.append("fields[utm_id][required]", "0");
       formDataToSend.append("fields[gclid][value]", utmParams.gclid);
       formDataToSend.append("fields[gclid][required]", "0");
+      formDataToSend.append("fields[keyword][value]", utmParams.keyword);
+      formDataToSend.append("fields[keyword][required]", "0");
       
       // Total de vidas (soma de todas as faixas etárias)
       const totalVidas = Object.values(formData.faixasEtarias).reduce((sum, count) => sum + count, 0);
